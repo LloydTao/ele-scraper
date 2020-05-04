@@ -18,7 +18,6 @@ Tests:
     Getting to it.
 """
 
-
 import os
 
 from selenium import webdriver
@@ -104,7 +103,6 @@ def create_driver(course_id):
 
     Returns:
         driver: Selenium web driver used for the duration of the script.
-
     """
     # Set options and create driver.
     download_dir = os.path.join('C:' + os.sep, 'Users', os.getlogin(), 'Downloads', 'ele-scraper', course_id)
