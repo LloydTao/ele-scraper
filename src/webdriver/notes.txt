@@ -1,0 +1,13 @@
+---------ChromeDriver 81.0.4044.69 (2020-03-17)---------
+Supports Chrome version 81
+Resolved issue 1049: Attempting to move mouse to corner of page in Chrome 41 throws WebDriverException: unknown error: Failed to execute 'getComputedStyle' on 'Window': parameter 1 is not of type 'Element' [Pri-2]
+Resolved issue 3153: ChromeDriver doesn't return iframe cookies [Pri-3]
+Resolved issue 3237: Returned value cannot be converted to Boolean: {} on isDisplayed() method. ChromeDriver 78 [Pri-]
+Resolved issue 3252: Getting org.openqa.selenium.WebDriverException: unknown error: cannot determine loading status [Pri-]
+Resolved issue 3291: Chromedriver is not returning spec compliant error code for timeouts [Pri-2]
+Resolved issue 3301: ChromeDriver Unexpected Slow response time on NewSession Command [Pri-2]
+Resolved issue 3312: Fail to set page load timeout time [Pri-2]
+Resolved issue 3316: ChromeDriver unable to connect to DevTools due to IPv4 vs IPv6 mismatch [Pri-2]
+Resolved issue 3336: WebDriver 80.0.3987.16 can't open Chrome on Linux [Pri-1]
+Resolved issue 3375: Chromedriver v80 hangs on getPageSource on some sites [Pri-1]
+Resolved issue 3383: ChromeDriver 80+ on Windows seems to exit or stall on certain element or click commands [Pri-1]
