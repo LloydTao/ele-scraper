@@ -80,11 +80,12 @@ Install the required packages:
 $ pip install -r requirements.txt
 ```
 
-Run the script:
+Run the script (with `-u` for real-time console logs):
 
 ```
 $ cd src/
-$ python main.py
+
+$ python -u main.py
 ```
 
 You'll be asked for your username, password, and a course ID.
