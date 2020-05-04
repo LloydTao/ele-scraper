@@ -50,19 +50,19 @@ def login(driver, username, password):
     e.click()
 
 
-def get_course_resources(driver, course_id):
+def get_module_resources(driver, module_id):
     """
     Get a list of resources found on a module page.
 
     Args:
         driver: Current Selenium web driver.
-        course_id: ID found in URL of module.
+        module_id: ID found in URL of module.
 
     Returns:
         resources: List of dicts containing resource name and link.
     """
     # Get page.
-    url = "https://vle.exeter.ac.uk/course/view.php?id=" + str(course_id)
+    url = "https://vle.exeter.ac.uk/course/view.php?id=" + str(module_id)
     driver.get(url)
 
     # Collect resources.
@@ -94,18 +94,18 @@ def get_resource(driver, resource):
     driver.get(link)
 
 
-def create_driver(course_id):
+def create_driver(module_id):
     """
     Create driver with download directory relevant to module ID.
 
     Args:
-        course_id: ID found in URL of module.
+        module_id: ID found in URL of module.
 
     Returns:
         driver: Selenium web driver used for the duration of the script.
     """
     # Set options and create driver.
-    download_dir = os.path.join('C:' + os.sep, 'Users', os.getlogin(), 'Downloads', 'ele-scraper', course_id)
+    download_dir = os.path.join('C:' + os.sep, 'Users', os.getlogin(), 'Downloads', 'ele-scraper', module_id)
     profile = {
         "plugins.always_open_pdf_externally": True,  # Disable Chrome's PDF Viewer
         "download.default_directory": download_dir,
@@ -126,13 +126,13 @@ if __name__ == "__main__":
     # Log in.
     username = input('Enter username: ')
     password = input('Enter password: ')
-    course_id = input('Enter course id: ')
+    module_id = input('Enter module id: ')
 
-    # Driver will use download directory of course_id.
-    driver = create_driver(course_id)
+    # Driver will use download directory of module_id.
+    driver = create_driver(module_id)
 
     login(driver, username, password)
-    resources = get_course_resources(driver, course_id)
+    resources = get_module_resources(driver, module_id)
 
     # Get files.
     resource = resources[0]
