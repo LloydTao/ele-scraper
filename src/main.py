@@ -79,7 +79,7 @@ if __name__ == "__main__":
     # Log in.
     username = input('Enter username: ')
     password = input('Enter password: ')
-    course_id = input('Enter course id: ') # 2890
+    course_id = input('Enter course id: ')
     
     # Driver will use download directory of course_id.
     driver = create_driver(course_id)
