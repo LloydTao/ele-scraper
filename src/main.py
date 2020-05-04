@@ -88,8 +88,8 @@ if __name__ == "__main__":
     resources = get_course_resources(driver, course_id)
     
     # Get files.
-    for resource in resources:
-        get_resource(driver, resource)
+    resource = resources[0]
+    get_resource(driver, resource)
     
     # Prompt to close browser.
     input('Close browser? ')
