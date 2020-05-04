@@ -145,6 +145,8 @@ if __name__ == "__main__":
     # Get files.
     resource = resources[0]
     get_resource(driver, resource)
+    driver.implicitly_wait(5)
+    print()
 
     # Prompt to close browser.
     input('Close browser? ')
