@@ -50,10 +50,7 @@ def get_resource(driver, resource):
 
 def create_driver(course_id):
     # Set options and create driver.
-    base_dir = r"C:\Users\Lewis Lloyd\downloads\ele-scraper"
-    course_dir = course_id
-    download_dir = os.path.join(base_dir, course_dir)
-
+    download_dir = os.path.join('C:' + os.sep, 'Users', os.getlogin(), 'Downloads', 'ele-scraper', course_id)
     profile = {
         "plugins.always_open_pdf_externally": True,  # Disable Chrome's PDF Viewer
         "download.default_directory": download_dir,
