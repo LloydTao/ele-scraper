@@ -2,7 +2,9 @@
 
 A web scraper for modules on Exeter Uni's VLE.
 
-This program will download lecture slides in various formats.
+![Course URL](media/social-media-card.png)
+
+This program will download lecture slides, and similar resources, in various formats.
 
 This program does **not** get lecture recaps or any other videos.
 
