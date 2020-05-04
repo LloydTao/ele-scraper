@@ -45,11 +45,15 @@ def login(driver, username, password):
         password: Student's VLE password.
     """
     # Wait for log-in form.
+    print('Navigating to correct log-in page...')
     driver.get("https://vle.exeter.ac.uk/auth/saml2/login.php")
     wait = WebDriverWait(driver, 10)
     wait.until(EC.visibility_of_element_located((By.NAME, 'Login')))
+    print('Found log-in page!')
+    print()
 
     # Log in.
+    print('Attempting to log in...')
     e = driver.find_element(By.NAME, "IDToken1")
     e.send_keys(username)
     e = driver.find_element(By.NAME, "IDToken2")
@@ -70,18 +74,22 @@ def get_module_resources(driver, module_id):
         resources: List of dicts containing resource name and link.
     """
     # Get page.
+    print('Navigating to module page...')
     url = "https://vle.exeter.ac.uk/course/view.php?id=" + str(module_id)
     driver.get(url)
 
     # Collect resources.
+    print('Collecting links to resources...')
     resources = []
     activities = driver.find_elements_by_class_name("activityinstance")
     for activity in activities:
         name = activity.find_element_by_class_name("instancename").text.replace("\nFile", "")
         link = activity.find_element_by_tag_name("a").get_attribute("href")
         if "Lecture" in name:
+            print('Found link for:', name)
             resources.append({'name': name, 'link': link})
 
+    print('Collected links to', len(resources), 'resources!')
     return resources
 
 
@@ -95,11 +103,14 @@ def get_resource(driver, resource):
         resource: A dictionary containing the resource name and link.
     """
     # Get the PDF link from the resource's link.
+    print('Looking for resource:', resource['name'])
     driver.get(resource['link'])
     link = driver.find_element_by_class_name("resourceworkaround").find_element_by_tag_name("a").get_attribute("href")
 
     # Opening the URL will save the file, if it's a resource (i.e. PDF).
+    print('Found resource! Downloading...')
     driver.get(link)
+    print('Resource downloaded!')
 
 
 def create_driver(module_id):
@@ -113,6 +124,7 @@ def create_driver(module_id):
         driver: Selenium web driver used for the duration of the script.
     """
     # Set options and create driver.
+    print('Configuring web driver...')
     download_dir = os.path.join('C:' + os.sep, 'Users', os.getlogin(), 'Downloads', 'ele-scraper', module_id)
     profile = {
         "plugins.always_open_pdf_externally": True,  # Disable Chrome's PDF Viewer
@@ -125,6 +137,7 @@ def create_driver(module_id):
     options = webdriver.ChromeOptions()
     options.add_experimental_option("prefs", profile)
 
+    print('Creating web driver...')
     driver = Chrome("webdriver/chromedriver.exe", options=options)
 
     return driver
@@ -135,12 +148,19 @@ if __name__ == "__main__":
     username = input('Enter username: ')
     password = input('Enter password: ')
     module_id = input('Enter module id: ')
+    print()
 
     # Driver will use download directory of module_id.
     driver = create_driver(module_id)
+    print('Web driver created!')
+    print()
 
     login(driver, username, password)
+    print('Log in successful!')
+    print()
+
     resources = get_module_resources(driver, module_id)
+    print()
 
     # Get files.
     resource = resources[0]
@@ -149,6 +169,5 @@ if __name__ == "__main__":
     print()
 
     # Prompt to close browser.
-    input('Close browser? ')
-
+    input('Finished. Close browser? [y]: ')
     driver.close()
