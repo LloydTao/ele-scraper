@@ -12,9 +12,9 @@ Examples:
     Make sure you're in the src/ directory, or Selenium will not find the driver.
 
 Todo:
-    Currently, the resource has to include "Lecture" in its name.
-    This worked for my courses, but it may be different for you.
-    I'm considering a config file to set this string to be different.
+    Currently, the scraper matches resources with "Lecture" in the name.
+    This is what I used for my courses, but it may be different for you.
+    I'm considering a config file to set this as a different string.
     For now, if you do run into troubles, just edit it in the source code.
 
 Multiple Modules:
