@@ -1,13 +1,21 @@
 """
 ele-scraper will go through a module page and download all resources.
 
-Usage:
+Examples:
     The script is run from the command line without any arguments.
 
-        $ python main.py
+        $ python -u main.py
 
     You will be prompted to enter a username, password and module ID.
     Selenium will then open a Chrome window so that you can monitor it.
+
+    Make sure you're in the src/ directory, or Selenium will not find the driver.
+
+Todo:
+    Currently, the resource has to include "Lecture" in its name.
+    This worked for my courses, but it may be different for you.
+    I'm considering a config file to set this string to be different.
+    For now, if you do run into troubles, just edit it in the source code.
 
 Multiple Modules:
     I am not adding the ability to download multiple modules at once.
