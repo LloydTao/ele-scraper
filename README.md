@@ -6,6 +6,9 @@ This program will download lecture slides in various formats.
 
 This program does **not** get lecture recaps or any other videos.
 
+*By downloading, installing and/or using ele-scraper ("Software"), you agree that the End User User License Agreement (EULA) is a legally binding and valid contract and agree to be bound by it.*
+
+
 ## Disclaimers
 
 ### Copyright
