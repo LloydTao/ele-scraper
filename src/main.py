@@ -94,9 +94,10 @@ def get_module_resources(driver, module_id):
                 print('Found link for:', resource_name)
                 resources.append({'name': resource_name, 'link': resource_link})
         except NoSuchElementException:
-            print('Could not find one link. ')
+            print('Could not find one link.')
             print('Assuming activity had no resource and moving on.')
             pass
+    print()
 
     # Collect pluginfile resources.
     print('Collecting links to pluginfile resources...')
@@ -112,9 +113,9 @@ def get_module_resources(driver, module_id):
                 print('Found link for:', resource_name)
                 resources.append({'name': resource_name, 'link': resource_link})
         except:
-            print('Grabbing pluginfile from link failed.')
-            print('Assuming link was invalid and moving on.')
+            print('Found pluginfile with no link. Ignoring...')
             pass
+    print()
 
     print('Collected links to', len(resources), 'resources!')
     return resources
@@ -140,7 +141,7 @@ def get_resource(driver, resource):
         driver.get(link)
         print('Resource downloaded!')
     except NoSuchElementException:
-        print('Cannot find resource workaround.')
+        print('Page has no resourceworkaround.')
         print('File was either already downloaded or is a url workaround (recap).')
 
 
@@ -169,6 +170,8 @@ def create_driver(module_id):
     }
 
     # Set options and create driver.
+    print('Determining directories and file paths...')
+
     download_dir = dir_for_os[platform.system()]
     print('Saving files to', download_dir)
     profile = {
@@ -184,6 +187,7 @@ def create_driver(module_id):
 
     driver_dir = driver_for_os[platform.system()]
     print('Using web driver at', driver_dir)
+    print()
 
     return Chrome(driver_dir, options=options)
 
@@ -197,7 +201,7 @@ if __name__ == "__main__":
 
     # Driver will use download directory of module_id.
     driver = create_driver(module_id)
-    print('Web driver created!')
+    print('Web driver started!')
     print()
 
     login(driver, username, password)
