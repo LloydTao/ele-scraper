@@ -80,9 +80,11 @@ def get_module_resources(driver, module_id):
     url = "https://vle.exeter.ac.uk/course/view.php?id=" + str(module_id)
     driver.get(url)
 
-    # Collect resources.
-    print('Collecting links to resources...')
+    # Start collecting resources.
     resources = []
+
+    # Collect activityinstance resources.
+    print('Collecting links to activityinstance resources...')
     activities = driver.find_elements_by_class_name("activityinstance")
     for activity in activities:
         try:
