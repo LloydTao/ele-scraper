@@ -103,7 +103,10 @@ def get_module_resources(driver, module_id):
     links = driver.find_elements_by_tag_name("a")
     for link in links:
         try:
-            resource_name = "Unknown pluginfile"
+            if link.text:
+                resource_name = link.text
+            else:
+                resource_name = "Unnamed pluginfile"
             resource_link = link.get_attribute("href")
             if "pluginfile" in resource_link:
                 print('Found link for:', resource_name)
