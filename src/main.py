@@ -84,11 +84,11 @@ def get_module_resources(driver, module_id):
     resources = []
     activities = driver.find_elements_by_class_name("activityinstance")
     for activity in activities:
-        name = activity.find_element_by_class_name("instancename").text.replace("\nFile", "")
-        link = activity.find_element_by_tag_name("a").get_attribute("href")
-        if "Lecture" in name:
-            print('Found link for:', name)
-            resources.append({'name': name, 'link': link})
+        resource_name = activity.find_element_by_class_name("instancename").text.replace("\nFile", "")
+        resource_link = activity.find_element_by_tag_name("a").get_attribute("href")
+        if "Lecture" in resource_name:
+            print('Found link for:', resource_name)
+            resources.append({'name': resource_name, 'link': resource_link})
 
     print('Collected links to', len(resources), 'resources!')
     return resources
