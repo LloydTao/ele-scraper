@@ -27,6 +27,7 @@ Tests:
 """
 
 import os
+import platform
 
 from selenium import webdriver
 from selenium.webdriver import Chrome
@@ -123,9 +124,23 @@ def create_driver(module_id):
     Returns:
         driver: Selenium web driver used for the duration of the script.
     """
+    # Get correct web driver file based on OS.
+    driver_for_os = {
+        'Windows': os.path.join('webdriver', 'win32',   'chromedriver.exe'),
+        'Linux':   os.path.join('webdriver', 'linux64', 'chromedriver'),
+        'Darwin':  os.path.join('webdriver', 'mac64',   'chromedriver')
+    }
+
+    # Get correct download dir for OS.
+    dir_for_os = {
+        'Windows': os.path.join('C:' + os.sep, 'Users', os.getlogin(), 'Downloads', 'ele-scraper', module_id),
+        'Linux': os.path.join(os.path.sep, 'home', os.getlogin(), 'Downloads', 'ele-scraper', module_id),
+        'Darwin': os.path.join(os.path.sep, 'home', os.getlogin(), 'Downloads', 'ele-scraper', module_id)
+    }
+
     # Set options and create driver.
-    print('Configuring web driver...')
-    download_dir = os.path.join('C:' + os.sep, 'Users', os.getlogin(), 'Downloads', 'ele-scraper', module_id)
+    download_dir = dir_for_os[platform.system()]
+    print('Saving files to', download_dir)
     profile = {
         "plugins.always_open_pdf_externally": True,  # Disable Chrome's PDF Viewer
         "download.default_directory": download_dir,
@@ -137,10 +152,10 @@ def create_driver(module_id):
     options = webdriver.ChromeOptions()
     options.add_experimental_option("prefs", profile)
 
-    print('Creating web driver...')
-    driver = Chrome("webdriver/chromedriver.exe", options=options)
+    driver_dir = driver_for_os[platform.system()]
+    print('Using web driver at', driver_dir)
 
-    return driver
+    return Chrome(driver_dir, options=options)
 
 
 if __name__ == "__main__":
