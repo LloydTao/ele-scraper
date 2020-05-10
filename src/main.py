@@ -126,6 +126,8 @@ def get_resource(driver, resource):
     """
     # Get the PDF link from the resource's link.
     print('Looking for resource:', resource['name'])
+    # Open a blank page, as getting a download link will use the same tab.
+    driver.get("about:blank")
     driver.get(resource['link'])
     try:
         link = driver.find_element_by_class_name("resourceworkaround").find_element_by_tag_name("a").get_attribute("href")
