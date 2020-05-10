@@ -95,6 +95,21 @@ def get_module_resources(driver, module_id):
             print('Assuming activity had no resource and moving on.')
             pass
 
+    # Collect pluginfile resources.
+    print('Collecting links to pluginfile resources...')
+    links = driver.find_elements_by_tag_name("a")
+    for link in links:
+        try:
+            resource_name = "Unknown pluginfile"
+            resource_link = link.get_attribute("href")
+            if "pluginfile" in resource_link:
+                print('Found link for:', resource_name)
+                resources.append({'name': resource_name, 'link': resource_link})
+        except:
+            print('Grabbing pluginfile from link failed.')
+            print('Assuming link was invalid and moving on.')
+            pass
+
     print('Collected links to', len(resources), 'resources!')
     return resources
 
