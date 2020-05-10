@@ -127,12 +127,14 @@ def get_resource(driver, resource):
     # Get the PDF link from the resource's link.
     print('Looking for resource:', resource['name'])
     driver.get(resource['link'])
-    link = driver.find_element_by_class_name("resourceworkaround").find_element_by_tag_name("a").get_attribute("href")
-
-    # Opening the URL will save the file, if it's a resource (i.e. PDF).
-    print('Found resource! Downloading...')
-    driver.get(link)
-    print('Resource downloaded!')
+    try:
+        link = driver.find_element_by_class_name("resourceworkaround").find_element_by_tag_name("a").get_attribute("href")
+        print('Found resource workaround! Downloading...')
+        driver.get(link)
+        print('Resource downloaded!')
+    except NoSuchElementException:
+        print('Cannot find resource workaround.')
+        print('File was either already downloaded or is a url workaround (recap).')
 
 
 def create_driver(module_id):
