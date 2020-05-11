@@ -113,7 +113,7 @@ def get_module_resources(driver, module_id):
             if "pluginfile" in resource_link:
                 print('Found link for:', resource_name)
                 resources.append({'name': resource_name, 'link': resource_link})
-        except:
+        except NoSuchElementException:
             print('Found pluginfile with no link. Ignoring...')
             pass
     print()
